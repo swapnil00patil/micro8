@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-demo
+  labels:
+    app: express-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: express-demo
+  template:
+    metadata:
+      labels:
+        app: express-demo
+    spec:
+      containers:
+      - name: express-demo
+        image: docker.io/library/express_dev:latest
+        ports:
+        - containerPort: 4000
+        imagePullPolicy: "Never"

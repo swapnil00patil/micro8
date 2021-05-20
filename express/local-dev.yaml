@@ -1,0 +1,21 @@
+spec:
+  template:
+    spec:
+      containers:
+        - name: express-dev-79fxf
+          command: ["/bin/sh","-c"]
+          args: ["export NODE_ENV=development; npm install -g yarn; yarn; yarn dev -- -L"]
+          volumeMounts:
+          - mountPath: /app
+            name: dev
+          - mountPath: /app/node_modules
+            name: dev-modules
+      volumes:
+      - name: dev-modules
+        hostPath:
+          path: /home/docker/tutorials/npm-modules
+          type: Directory
+      - name: dev
+        hostPath:
+          path: /home/docker/tutorials/express
+          type: Directory

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: express-demo
+    labels:
+        app: express-demo
+spec:
+    ports:
+    - name: http
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+    selector:
+        app: express-demo
+    type: NodePort

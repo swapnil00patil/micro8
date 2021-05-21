@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  dev:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: spring-demo
+    volumes:
+      - ./:/app
+    ports:
+      - '8080:8080'

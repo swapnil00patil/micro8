@@ -4,6 +4,11 @@ plugins {
 	id 'java'
 }
 
+bootJar {
+	classpath configurations.developmentOnly
+	excludeDevtools = false
+}
+
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -20,6 +25,7 @@ dependencies {
 	// tag::tests[]
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	// end::tests[]
+	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 test {

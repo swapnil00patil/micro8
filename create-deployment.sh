@@ -3,6 +3,8 @@
 
 create_deployment () {
   container=$1
+  port=$2
+  debugPort=$3
   kubectl apply -f - <<EOF
 apiVersion: apps/v1
 kind: Deployment
@@ -24,13 +26,18 @@ spec:
       - name: ${container}
         image: docker.io/library/${container}:latest
         ports:
-        - containerPort: 8080
+        - containerPort: ${port}
+          name: run-port
+        - containerPort: ${debugPort}
+          name: debug-port
         imagePullPolicy: 'Never'
 EOF
 }
 
 create_service () {
   container=$1
+  port=$2
+  debugPort=$3
   kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Service
@@ -42,8 +49,12 @@ spec:
     ports:
     - name: http
       protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 80
+      targetPort: ${port}
+    - name: debug
+      protocol: TCP
+      port: ${debugPort}
+      targetPort: ${debugPort}
     selector:
         app: ${container}
     type: NodePort

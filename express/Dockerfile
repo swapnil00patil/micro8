@@ -10,5 +10,3 @@ ADD . .
 RUN npm install
 
 ENTRYPOINT ["/entrypoint.sh"]
-
-# CMD ["DEBUG=express:*", "npm", "start"]
